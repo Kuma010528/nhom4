@@ -6,8 +6,17 @@
 <title>Hà Nội Food</title>
 
 <style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:Arial, sans-serif}
-body{background:#fff8f0;color:#333}
+*{margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial, sans-serif}
+body{
+    background:#fff8f0;
+    color:#333;
+    min-height:100vh;
+    display:flex;
+    flex-direction:column;
+}
 
 /* HEADER */
 header{
@@ -138,6 +147,22 @@ footer{
     font-weight:bold;
 }
 .cart-item{margin:6px 0;border-bottom:1px solid #ddd;padding-bottom:4px}
+
+.container{
+    max-width:1100px;
+    margin:40px auto;
+    padding:20px;
+    flex:1;
+}
+
+footer{
+    background:#333;
+    color:white;
+    text-align:center;
+    padding:20px;
+    margin-top:30px;
+}
+
 </style>
 </head>
 
@@ -168,9 +193,11 @@ footer{
                 <h3>Phở Bò</h3>
                 <p>Phở bò nước trong đậm đà</p>
                 <div class="price">45.000đ</div>
-                <button class="order-btn" onclick="window.location.href='datmon.html'">
+                <button class="order-btn"
+onclick="goToOrder('Phở Bò',45000)">
     Đặt món
 </button>
+
 
             </div>
         </div>
@@ -181,9 +208,11 @@ footer{
                 <h3>Bún Chả</h3>
                 <p>Thịt nướng than hoa thơm lừng</p>
                 <div class="price">40.000đ</div>
-                <button class="order-btn" onclick="window.location.href='datmon.html'">
+                <button class="order-btn"
+onclick="goToOrder('Bún Chả',40000)">
     Đặt món
 </button>
+
 
             </div>
         </div>
@@ -194,9 +223,11 @@ footer{
                 <h3>Bánh Mì</h3>
                 <p>Bánh Mì Hà Nội là món ăn đường phố quen thuộc với vỏ giòn rụm, nhân pate, chả, thịt và dưa góp hài hòa. Hương vị đậm đà, tiện lợi, phù hợp cho mọi bữa trong ngày</p>
                 <div class="price">25.000đ</div>
-                <button class="order-btn" onclick="window.location.href='datmon.html'">
+                <button class="order-btn"
+onclick="goToOrder('Bánh mì',25000)">
     Đặt món
 </button>
+
 
             </div>
         </div>
@@ -207,9 +238,11 @@ footer{
                 <h3>Bún Thang</h3>
                 <p>🍜 Bún Thang: Nước dùng trong, thanh ngọt, kết hợp trứng, giò, gà xé tinh tế</p>
                 <div class="price">50.000đ</div>
-                <button class="order-btn" onclick="window.location.href='datmon.html'">
+                <button class="order-btn"
+onclick="goToOrder('Bún Thang',50000)">
     Đặt món
 </button>
+
 
             </div>
         </div>
@@ -219,10 +252,11 @@ footer{
             <div class="food-info">
                 <h3>Chả Cá Lã Vọng</h3>
                 <p>🐟 Chả Cá Lã Vọng: Cá ướp nghệ nướng thơm, ăn kèm bún và mắm tôm đặc trưng</p>
-                <div class="price">120.000đ</div>
-                <button class="order-btn" onclick="window.location.href='datmon.html'">
+                <div class="price">120.000đ</div><button class="order-btn"
+onclick="goToOrder('Chả Cá Lã Vọng',120000)">
     Đặt món
 </button>
+
 
             </div>
         </div>
@@ -233,9 +267,11 @@ footer{
                 <h3>Nộm Bò Khô</h3>
                 <p>🥗 Nộm Bò Khô: Đu đủ giòn, bò khô đậm vị, chua cay mặn ngọt hài hòa</p>
                 <div class="price">35.000đ</div>
-                <button class="order-btn" onclick="window.location.href='datmon.html'">
+ <button class="order-btn"
+onclick="goToOrder('Nộm Bò Khô',35000)">
     Đặt món
 </button>
+
 
             </div>
         </div>
@@ -246,9 +282,11 @@ footer{
                  <h3>Bánh cuốn Thanh Trì</h3>
                  <p>🥟 Bánh Cuốn Thanh Trì: Bánh mỏng mềm, nhân thịt mộc nhĩ, ăn cùng nước mắm thanh nhẹ</p>
                  <div class="price">40.000đ</div>
-                <button class="order-btn" onclick="window.location.href='datmon.html'">
+                <button class="order-btn"
+onclick="goToOrder('Bánh cuốn Thanh Trì',40000)">
     Đặt món
 </button>
+
 
             </div>
         </div>
@@ -259,9 +297,11 @@ footer{
                 <h3>Xôi xéo</h3>
                 <p>🍚 Xôi Xéo: Xôi nếp dẻo thơm, đậu xanh mịn, hành phi béo bùi</p>
                 <div class="price">20.000đ</div>
-                <button class="order-btn" onclick="window.location.href='datmon.html'">
+                <button class="order-btn"
+onclick="goToOrder('Xôi xéo',20000)">
     Đặt món
 </button>
+
 
             </div>
         </div>
@@ -380,6 +420,74 @@ function register(){
     closeRegister();
 }
 </script>
+
+<script>
+let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+function addToCart(name, price){
+    let item = cart.find(i => i.name === name);
+
+    if(item){
+        item.qty += 1;
+    }else{
+        cart.push({name, price, qty:1});
+    }
+
+    localStorage.setItem("cart", JSON.stringify(cart));
+    alert("Đã thêm " + name + " vào giỏ hàng!");
+}
+
+function openCart(){
+    document.getElementById("cartPopup").style.display = "block";
+    renderCart();
+}
+
+function closeCart(){
+    document.getElementById("cartPopup").style.display = "none";
+}
+
+function renderCart(){
+    let cartItems = document.getElementById("cartItems");
+    let total = 0;
+    cartItems.innerHTML = "";
+
+    cart.forEach(item => {
+        let itemTotal = item.price * item.qty;
+        total += itemTotal;
+
+        cartItems.innerHTML += `
+            <div class="cart-item">
+                <strong>${item.name}</strong><br>
+                Số lượng: ${item.qty}<br>
+                Giá: ${itemTotal.toLocaleString()}đ
+            </div>
+        `;
+    });
+
+    document.getElementById("totalPrice").innerText = total.toLocaleString();
+}
+
+function checkout(){
+    if(cart.length === 0){
+        alert("Giỏ hàng trống!");
+        return;
+    }
+    alert("🎉 Thanh toán thành công!");
+    cart = [];
+    localStorage.removeItem("cart");
+    renderCart();
+    closeCart();
+}
+</script>
+
+<script>
+function goToOrder(name, price){
+    localStorage.setItem("currentItem", JSON.stringify({name, price}));
+    window.location.href = "datmon.html";
+}
+</script>
+
+
 
 </body>
 </html>
