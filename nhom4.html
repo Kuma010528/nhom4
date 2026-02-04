@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hà Nội Food</title>
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:Arial, sans-serif}
+body{background:#fff8f0;color:#333}
+
+/* HEADER */
+header{
+    background:url("https://images.pexels.com/photos/70497/pexels-photo-70497.jpeg") center/cover;
+    height:300px;
+    color:white;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+}
+header h1{font-size:48px;text-shadow:2px 2px 6px black}
+header p{font-size:20px;margin-top:10px}
+
+/* NAV */
+nav{
+    background:#d35400;
+    padding:12px;
+    text-align:center;
+    position:sticky;
+    top:0;
+}
+nav a{
+    color:white;
+    margin:0 12px;
+    text-decoration:none;
+    font-weight:bold;
+}
+nav a:hover{text-decoration:underline}
+
+/* FOOD LIST */
+.container{max-width:1100px;margin:40px auto;padding:20px}
+.food-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+    gap:25px;
+}
+.food-card{
+    background:white;
+    border-radius:12px;
+    overflow:hidden;
+    box-shadow:0 6px 15px rgba(0,0,0,0.1);
+    transition:0.3s;
+}
+.food-card:hover{transform:translateY(-5px)}
+.food-card img{
+    width:100%;
+    height:180px;
+    object-fit:cover;
+}
+.food-info{padding:15px}
+.food-info h3{color:#d35400;margin-bottom:8px}
+.price{color:red;font-weight:bold;margin-top:5px}
+.order-btn{
+    margin-top:10px;
+    padding:8px;
+    width:100%;
+    border:none;
+    background:#d35400;
+    color:white;
+    border-radius:6px;
+    cursor:pointer;
+}
+
+/* OFFERS */
+.offers{
+    background:#ffe8cc;
+    padding:40px 20px;
+    text-align:center;
+}
+.offers h2{color:#d35400;margin-bottom:15px}
+.offer-box{margin:10px 0;font-weight:bold}
+
+/* CONTACT */
+.contact{
+    background:#fff3e6;
+    padding:40px 20px;
+    margin-top:30px;
+    text-align:center;
+}
+.contact h2{color:#d35400;margin-bottom:15px}
+
+/* FOOTER */
+footer{
+    background:#333;
+    color:white;
+    text-align:center;
+    padding:20px;
+    margin-top:30px;
+}
+
+/* POPUPS */
+.popup{
+    display:none;
+    position:fixed;
+    top:0;left:0;
+    width:100%;height:100%;
+    background:rgba(0,0,0,0.5);
+}
+.popup-content{
+    background:white;
+    width:350px;
+    margin:8% auto;
+    padding:20px;
+    border-radius:10px;
+    position:relative;
+}
+.popup-content h2{text-align:center;color:#d35400;margin-bottom:10px}
+.popup-content input{
+    width:100%;
+    padding:8px;
+    margin:8px 0;
+}
+.popup-content button{
+    width:100%;
+    padding:10px;
+    background:#d35400;
+    color:white;
+    border:none;
+    border-radius:6px;
+}
+.close{
+    position:absolute;
+    right:12px;
+    top:8px;
+    cursor:pointer;
+    font-weight:bold;
+}
+.cart-item{margin:6px 0;border-bottom:1px solid #ddd;padding-bottom:4px}
+</style>
+</head>
+
+<body>
+
+<header>
+    <h1>Ẩm Thực Hà Nội</h1>
+    <p>Đặt món ngon chuẩn vị thủ đô</p>
+</header>
+
+<nav>
+    <a href="#">Trang Chủ</a>
+    <a href="#foods">Món Ăn</a>
+    <a href="#offers">Ưu Đãi</a>
+    <a href="#contact">Liên Hệ</a>
+    <a href="#" onclick="openCart()">🛒 Giỏ hàng</a>
+    <a href="#" onclick="openLogin()">Đăng nhập</a>
+    <a href="#" onclick="openRegister()">Đăng ký</a>
+</nav>
+
+<div class="container" id="foods">
+    <div class="food-grid">
+
+        <!-- MÓN ĂN -->
+        <div class="food-card">
+            <img src="https://bizweb.dktcdn.net/100/479/802/files/cach-nau-pho-bo-nam-dinh-chuan-vi-thom-ngon-nhu-hang-quan-202201250313281452-d4b8054b-dc7c-47d2-9a37-7bd1e59ae34a.jpg?v=1726799703557">
+            <div class="food-info">
+                <h3>Phở Bò</h3>
+                <p>Phở bò nước trong đậm đà</p>
+                <div class="price">45.000đ</div>
+                <button class="order-btn" onclick="window.location.href='datmon.html'">
+    Đặt món
+</button>
+
+            </div>
+        </div>
+
+        <div class="food-card">
+            <img src="https://img-global.cpcdn.com/recipes/83c17e7c30d6c02d/1200x630cq80/photo.jpg">
+            <div class="food-info">
+                <h3>Bún Chả</h3>
+                <p>Thịt nướng than hoa thơm lừng</p>
+                <div class="price">40.000đ</div>
+                <button class="order-btn" onclick="window.location.href='datmon.html'">
+    Đặt món
+</button>
+
+            </div>
+        </div>
+
+        <div class="food-card">
+            <img src="https://cdn2.fptshop.com.vn/unsafe/Uploads/images/tin-tuc/173733/Originals/banh-mi-pate-12.JPG">
+            <div class="food-info">
+                <h3>Bánh Mì</h3>
+                <p>Bánh Mì Hà Nội là món ăn đường phố quen thuộc với vỏ giòn rụm, nhân pate, chả, thịt và dưa góp hài hòa. Hương vị đậm đà, tiện lợi, phù hợp cho mọi bữa trong ngày</p>
+                <div class="price">25.000đ</div>
+                <button class="order-btn" onclick="window.location.href='datmon.html'">
+    Đặt món
+</button>
+
+            </div>
+        </div>
+
+        <div class="food-card">
+            <img src="https://i-giadinh.vnecdn.net/2023/02/02/Thanh-pham-1-1-5769-1675329999.jpg">
+            <div class="food-info">
+                <h3>Bún Thang</h3>
+                <p>🍜 Bún Thang: Nước dùng trong, thanh ngọt, kết hợp trứng, giò, gà xé tinh tế</p>
+                <div class="price">50.000đ</div>
+                <button class="order-btn" onclick="window.location.href='datmon.html'">
+    Đặt món
+</button>
+
+            </div>
+        </div>
+
+        <div class="food-card">
+            <img src="https://cdn.hstatic.net/files/200000700229/article/cha-ca-la-vong-thumb_4adbac9946c14ba9abe41fafe63bb53c.jpg">
+            <div class="food-info">
+                <h3>Chả Cá Lã Vọng</h3>
+                <p>🐟 Chả Cá Lã Vọng: Cá ướp nghệ nướng thơm, ăn kèm bún và mắm tôm đặc trưng</p>
+                <div class="price">120.000đ</div>
+                <button class="order-btn" onclick="window.location.href='datmon.html'">
+    Đặt món
+</button>
+
+            </div>
+        </div>
+
+        <div class="food-card">
+            <img src="https://cdn.tgdd.vn/Files/2021/08/14/1375232/hoc-cach-lam-mon-nom-bo-kho-thom-ngon-chuan-vi-ngon-pho-co-202201060956067734.jpg">
+            <div class="food-info">
+                <h3>Nộm Bò Khô</h3>
+                <p>🥗 Nộm Bò Khô: Đu đủ giòn, bò khô đậm vị, chua cay mặn ngọt hài hòa</p>
+                <div class="price">35.000đ</div>
+                <button class="order-btn" onclick="window.location.href='datmon.html'">
+    Đặt món
+</button>
+
+            </div>
+        </div>
+
+        <div class="food-card">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSi7xIXd5Nzo1j6iAW-REimxv948QIVIBLGDg&s.jpg">
+            <div class="food-info">
+                 <h3>Bánh cuốn Thanh Trì</h3>
+                 <p>🥟 Bánh Cuốn Thanh Trì: Bánh mỏng mềm, nhân thịt mộc nhĩ, ăn cùng nước mắm thanh nhẹ</p>
+                 <div class="price">40.000đ</div>
+                <button class="order-btn" onclick="window.location.href='datmon.html'">
+    Đặt món
+</button>
+
+            </div>
+        </div>
+
+        <div class="food-card">
+            <img src="https://file.hstatic.net/200000700229/article/xoi-xeo-bang-noi-com-dien-thumb_fc09e02bf22a4b50be49a5cbfd7b8818.jpg">
+            <div class="food-info">
+                <h3>Xôi xéo</h3>
+                <p>🍚 Xôi Xéo: Xôi nếp dẻo thơm, đậu xanh mịn, hành phi béo bùi</p>
+                <div class="price">20.000đ</div>
+                <button class="order-btn" onclick="window.location.href='datmon.html'">
+    Đặt món
+</button>
+
+            </div>
+        </div>
+
+<!-- ƯU ĐÃI -->
+<div class="offers" id="offers">
+    <h2>🎉 Ưu Đãi Hôm Nay</h2>
+    <div class="offer-box">🔥 Giảm 20% cho đơn trên 200.000đ</div>
+    <div class="offer-box">🥤 Tặng trà đá miễn phí cho mọi đơn hàng</div>
+    <div class="offer-box">🚚 Miễn phí giao hàng bán kính 3km</div>
+</div>
+
+<!-- LIÊN HỆ -->
+<div class="contact" id="contact">
+    <h2>Liên Hệ</h2>
+    <p>📍 Hà Nội, Việt Nam</p>
+    <p>📞 0123 456 789</p>
+    <p>📧 hanoifood@gmail.com</p>
+</div>
+
+<footer>© 2026 Hà Nội Food</footer>
+
+<!-- GIỎ HÀNG -->
+<div id="cartPopup" class="popup">
+  <div class="popup-content">
+    <span class="close" onclick="closeCart()">&times;</span>
+    <h2>Giỏ Hàng</h2>
+    <div id="cartItems"></div>
+    <h3>Tổng: <span id="totalPrice">0</span> đ</h3>
+    <button onclick="checkout()">Thanh toán</button>
+  </div>
+</div>
+
+<script>
+let cart = [];
+
+function addToCart(name, price){
+    cart.push({name, price});
+    alert("Đã thêm " + name + " vào giỏ hàng!");
+}
+
+function openCart(){
+    document.getElementById("cartPopup").style.display="block";
+    renderCart();
+}
+function closeCart(){
+    document.getElementById("cartPopup").style.display="none";
+}
+
+
+function renderCart(){
+    let cartItems = document.getElementById("cartItems");
+    let total = 0;
+    cartItems.innerHTML="";
+    cart.forEach(item=>{
+        total += item.price;
+        cartItems.innerHTML += <div class="cart-item">${item.name} - ${item.price.toLocaleString()}đ</div>;
+    });
+    document.getElementById("totalPrice").innerText = total.toLocaleString();
+}
+
+function checkout(){
+    if(cart.length===0){alert("Giỏ hàng trống!");return;}
+    alert("Thanh toán thành công! Đơn hàng đang được chuẩn bị 🍜");
+    cart=[];
+    renderCart();
+    closeCart();
+}
+</script>
+
+<!-- ĐĂNG NHẬP -->
+<div id="loginPopup" class="popup">
+  <div class="popup-content">
+    <span class="close" onclick="closeLogin()">&times;</span>
+    <h2>Đăng nhập</h2>
+    <input type="text" placeholder="Tên đăng nhập">
+    <input type="password" placeholder="Mật khẩu">
+    <button onclick="login()">Đăng nhập</button>
+  </div>
+</div>
+
+<!-- ĐĂNG KÝ -->
+<div id="registerPopup" class="popup">
+  <div class="popup-content">
+    <span class="close" onclick="closeRegister()">&times;</span>
+    <h2>Đăng ký</h2>
+    <input type="text" placeholder="Họ và tên">
+    <input type="email" placeholder="Email">
+    <input type="password" placeholder="Mật khẩu">
+    <button onclick="register()">Đăng ký</button>
+  </div>
+</div>
+
+<script>
+function openLogin(){
+    document.getElementById("loginPopup").style.display="block";
+}
+function closeLogin(){
+    document.getElementById("loginPopup").style.display="none";
+}
+
+function openRegister(){
+    document.getElementById("registerPopup").style.display="block";
+}
+function closeRegister(){
+    document.getElementById("registerPopup").style.display="none";
+}
+
+function login(){
+    alert("Đăng nhập thành công!");
+    closeLogin();
+}
+
+function register(){
+    alert("Đăng ký thành công!");
+    closeRegister();
+}
+</script>
+
+</body>
+</html>
